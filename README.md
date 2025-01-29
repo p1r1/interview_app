@@ -11,3 +11,6 @@ Bu proje, lojistik verilerini analiz etmek, yönetmek ve operasyonel verimliliğ
 ## Nasıl Çalıştırılır
 
 ## Nasıl Kullanılır
+
+## Kaynaklar
+https://www.kaggle.com/datasets/aashokaacharya/logistics-company-dataset-for-sql
