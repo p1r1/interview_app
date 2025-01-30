@@ -1,0 +1,1874 @@
+openapi: 3.0.3
+info:
+  title: Logistics API
+  version: 1.0.0
+paths:
+  /api/customers/:
+    get:
+      operationId: api_customers_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCustomerList'
+          description: ''
+    post:
+      operationId: api_customers_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Customer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: ''
+  /api/customers/{rec_id}/:
+    get:
+      operationId: api_customers_retrieve
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: ''
+    put:
+      operationId: api_customers_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Customer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: ''
+    patch:
+      operationId: api_customers_partial_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomer'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomer'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCustomer'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Customer'
+          description: ''
+    delete:
+      operationId: api_customers_destroy
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/employeemanagesshipments/:
+    get:
+      operationId: api_employeemanagesshipments_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEmployeeManagesShipmentList'
+          description: ''
+    post:
+      operationId: api_employeemanagesshipments_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeManagesShipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmployeeManagesShipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmployeeManagesShipment'
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeManagesShipment'
+          description: ''
+  /api/employeemanagesshipments/{rec_id}/:
+    get:
+      operationId: api_employeemanagesshipments_retrieve
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeManagesShipment'
+          description: ''
+    put:
+      operationId: api_employeemanagesshipments_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeManagesShipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmployeeManagesShipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmployeeManagesShipment'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeManagesShipment'
+          description: ''
+    patch:
+      operationId: api_employeemanagesshipments_partial_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeManagesShipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeManagesShipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployeeManagesShipment'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeManagesShipment'
+          description: ''
+    delete:
+      operationId: api_employeemanagesshipments_destroy
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/employees/:
+    get:
+      operationId: api_employees_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEmployeeList'
+          description: ''
+    post:
+      operationId: api_employees_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Employee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Employee'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+          description: ''
+  /api/employees/{rec_id}/:
+    get:
+      operationId: api_employees_retrieve
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+          description: ''
+    put:
+      operationId: api_employees_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Employee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Employee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Employee'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+          description: ''
+    patch:
+      operationId: api_employees_partial_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployee'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployee'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmployee'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+          description: ''
+    delete:
+      operationId: api_employees_destroy
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/memberships/:
+    get:
+      operationId: api_memberships_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedMembershipList'
+          description: ''
+    post:
+      operationId: api_memberships_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Membership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Membership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Membership'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
+  /api/memberships/{rec_id}/:
+    get:
+      operationId: api_memberships_retrieve
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
+    put:
+      operationId: api_memberships_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Membership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Membership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Membership'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
+    patch:
+      operationId: api_memberships_partial_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedMembership'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedMembership'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedMembership'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Membership'
+          description: ''
+    delete:
+      operationId: api_memberships_destroy
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/payments/:
+    get:
+      operationId: api_payments_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedPaymentList'
+          description: ''
+    post:
+      operationId: api_payments_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Payment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Payment'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
+  /api/payments/{rec_id}/:
+    get:
+      operationId: api_payments_retrieve
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
+    put:
+      operationId: api_payments_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Payment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Payment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Payment'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
+    patch:
+      operationId: api_payments_partial_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedPayment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedPayment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedPayment'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Payment'
+          description: ''
+    delete:
+      operationId: api_payments_destroy
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/schema/:
+    get:
+      operationId: api_schema_retrieve
+      description: |-
+        OpenApi3 schema for this API. Format can be selected via content negotiation.
+
+        - YAML: application/vnd.oai.openapi
+        - JSON: application/vnd.oai.openapi+json
+      parameters:
+      - in: query
+        name: format
+        schema:
+          type: string
+          enum:
+          - json
+          - yaml
+      - in: query
+        name: lang
+        schema:
+          type: string
+          enum:
+          - af
+          - ar
+          - ar-dz
+          - ast
+          - az
+          - be
+          - bg
+          - bn
+          - br
+          - bs
+          - ca
+          - ckb
+          - cs
+          - cy
+          - da
+          - de
+          - dsb
+          - el
+          - en
+          - en-au
+          - en-gb
+          - eo
+          - es
+          - es-ar
+          - es-co
+          - es-mx
+          - es-ni
+          - es-ve
+          - et
+          - eu
+          - fa
+          - fi
+          - fr
+          - fy
+          - ga
+          - gd
+          - gl
+          - he
+          - hi
+          - hr
+          - hsb
+          - hu
+          - hy
+          - ia
+          - id
+          - ig
+          - io
+          - is
+          - it
+          - ja
+          - ka
+          - kab
+          - kk
+          - km
+          - kn
+          - ko
+          - ky
+          - lb
+          - lt
+          - lv
+          - mk
+          - ml
+          - mn
+          - mr
+          - ms
+          - my
+          - nb
+          - ne
+          - nl
+          - nn
+          - os
+          - pa
+          - pl
+          - pt
+          - pt-br
+          - ro
+          - ru
+          - sk
+          - sl
+          - sq
+          - sr
+          - sr-latn
+          - sv
+          - sw
+          - ta
+          - te
+          - tg
+          - th
+          - tk
+          - tr
+          - tt
+          - udm
+          - ug
+          - uk
+          - ur
+          - uz
+          - vi
+          - zh-hans
+          - zh-hant
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/yaml:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: object
+                additionalProperties: {}
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /api/shipments/:
+    get:
+      operationId: api_shipments_list
+      parameters:
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedShipmentList'
+          description: ''
+    post:
+      operationId: api_shipments_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Shipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Shipment'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+          description: ''
+  /api/shipments/{rec_id}/:
+    get:
+      operationId: api_shipments_retrieve
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+          description: ''
+    put:
+      operationId: api_shipments_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Shipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Shipment'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+          description: ''
+    patch:
+      operationId: api_shipments_partial_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedShipment'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedShipment'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedShipment'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+          description: ''
+    delete:
+      operationId: api_shipments_destroy
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+  /api/statuses/:
+    get:
+      operationId: api_statuses_list
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedStatusList'
+          description: ''
+    post:
+      operationId: api_statuses_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Status'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Status'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Status'
+        required: true
+      security:
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: ''
+  /api/statuses/{rec_id}/:
+    get:
+      operationId: api_statuses_retrieve
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: ''
+    put:
+      operationId: api_statuses_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Status'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Status'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Status'
+        required: true
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: ''
+    patch:
+      operationId: api_statuses_partial_update
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedStatus'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedStatus'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedStatus'
+      security:
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+          description: ''
+    delete:
+      operationId: api_statuses_destroy
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+          description: Record Id
+        required: true
+      tags:
+      - api
+      security:
+      - {}
+      responses:
+        '204':
+          description: No response body
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        C_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Customer Id
+        C_NAME:
+          type: string
+          description: Customer Name
+          maxLength: 30
+        C_EMAIL_ID:
+          type: string
+          description: Customer Email
+          maxLength: 50
+        C_CONT_NO:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Customer Phone
+        C_ADDR:
+          type: string
+          description: Customer Address
+          maxLength: 100
+        C_TYPE:
+          type: string
+          description: Customer Type
+          maxLength: 30
+        M_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - C_ADDR
+      - C_CONT_NO
+      - C_EMAIL_ID
+      - C_ID
+      - C_NAME
+      - C_TYPE
+      - M_ID
+      - rec_id
+    Employee:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        E_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Employee ID
+        E_NAME:
+          type: string
+          description: Employee Name
+          maxLength: 30
+        E_BRANCH:
+          type: string
+          description: Employee Branch
+          maxLength: 15
+        E_DESIGNATION:
+          type: string
+          description: Employee Designation
+          maxLength: 40
+        E_ADDR:
+          type: string
+          description: Employee Address
+          maxLength: 100
+        E_CONT_NO:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Employee Phone
+      required:
+      - E_ADDR
+      - E_BRANCH
+      - E_CONT_NO
+      - E_DESIGNATION
+      - E_ID
+      - E_NAME
+      - rec_id
+    EmployeeManagesShipment:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        Employee_E_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        Shipment_Sh_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        Status_Sh_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - Employee_E_ID
+      - Shipment_Sh_ID
+      - Status_Sh_ID
+      - rec_id
+    Membership:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        M_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Membership Id
+        Start_date:
+          type: string
+          format: date
+          nullable: true
+          description: Membership Start Date
+        End_date:
+          type: string
+          format: date
+          nullable: true
+          description: Membership End Date
+      required:
+      - M_ID
+      - rec_id
+    Nested:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        M_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Membership Id
+        Start_date:
+          type: string
+          format: date
+          nullable: true
+          description: Membership Start Date
+        End_date:
+          type: string
+          format: date
+          nullable: true
+          description: Membership End Date
+      required:
+      - M_ID
+      - rec_id
+    PaginatedCustomerList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+    PaginatedEmployeeList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Employee'
+    PaginatedEmployeeManagesShipmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployeeManagesShipment'
+    PaginatedMembershipList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Membership'
+    PaginatedPaymentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+    PaginatedShipmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shipment'
+    PaginatedStatusList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Status'
+    PatchedCustomer:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        C_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Customer Id
+        C_NAME:
+          type: string
+          description: Customer Name
+          maxLength: 30
+        C_EMAIL_ID:
+          type: string
+          description: Customer Email
+          maxLength: 50
+        C_CONT_NO:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Customer Phone
+        C_ADDR:
+          type: string
+          description: Customer Address
+          maxLength: 100
+        C_TYPE:
+          type: string
+          description: Customer Type
+          maxLength: 30
+        M_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+    PatchedEmployee:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        E_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Employee ID
+        E_NAME:
+          type: string
+          description: Employee Name
+          maxLength: 30
+        E_BRANCH:
+          type: string
+          description: Employee Branch
+          maxLength: 15
+        E_DESIGNATION:
+          type: string
+          description: Employee Designation
+          maxLength: 40
+        E_ADDR:
+          type: string
+          description: Employee Address
+          maxLength: 100
+        E_CONT_NO:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Employee Phone
+    PatchedEmployeeManagesShipment:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        Employee_E_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        Shipment_Sh_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        Status_Sh_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+    PatchedMembership:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        M_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Membership Id
+        Start_date:
+          type: string
+          format: date
+          nullable: true
+          description: Membership Start Date
+        End_date:
+          type: string
+          format: date
+          nullable: true
+          description: Membership End Date
+    PatchedPayment:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        Payment_ID:
+          type: string
+          description: Payment Id (UID)
+          maxLength: 40
+        AMOUNT:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          description: Customer Payment Amount
+        Payment_Status:
+          type: string
+          description: Payment Status
+          maxLength: 10
+        Payment_Mode:
+          type: string
+          description: Payment Method
+          maxLength: 25
+        Payment_Date:
+          type: string
+          format: date
+          nullable: true
+          description: Payment Date
+        C_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        SH_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+    PatchedShipment:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        SH_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Shipment Id
+        SH_CONTENT:
+          type: string
+          description: Shipmet Content Type
+          maxLength: 40
+        SH_DOMAIN:
+          type: string
+          description: Shipment Domain
+          maxLength: 15
+        SER_TYPE:
+          type: string
+          description: Shipment Service Type
+          maxLength: 15
+        SH_WEIGHT:
+          type: string
+          description: Shipment Weight
+          maxLength: 10
+        SH_CHARGES:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          description: Shipment Charges
+        SR_ADDR:
+          type: string
+          description: Source Address
+          maxLength: 100
+        DS_ADDR:
+          type: string
+          description: Destination Addres
+          maxLength: 100
+        C_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+    PatchedStatus:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        SH_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Shipmet Id
+        Current_Status:
+          type: string
+          description: Current Status of Shipment
+          maxLength: 15
+        Sent_date:
+          type: string
+          format: date
+          nullable: true
+          description: Sent Date
+        Delivery_date:
+          type: string
+          format: date
+          nullable: true
+          description: Delivery Date
+    Payment:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        Payment_ID:
+          type: string
+          description: Payment Id (UID)
+          maxLength: 40
+        AMOUNT:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          description: Customer Payment Amount
+        Payment_Status:
+          type: string
+          description: Payment Status
+          maxLength: 10
+        Payment_Mode:
+          type: string
+          description: Payment Method
+          maxLength: 25
+        Payment_Date:
+          type: string
+          format: date
+          nullable: true
+          description: Payment Date
+        C_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        SH_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - AMOUNT
+      - C_ID
+      - Payment_ID
+      - Payment_Mode
+      - Payment_Status
+      - SH_ID
+      - rec_id
+    Shipment:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        SH_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Shipment Id
+        SH_CONTENT:
+          type: string
+          description: Shipmet Content Type
+          maxLength: 40
+        SH_DOMAIN:
+          type: string
+          description: Shipment Domain
+          maxLength: 15
+        SER_TYPE:
+          type: string
+          description: Shipment Service Type
+          maxLength: 15
+        SH_WEIGHT:
+          type: string
+          description: Shipment Weight
+          maxLength: 10
+        SH_CHARGES:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          description: Shipment Charges
+        SR_ADDR:
+          type: string
+          description: Source Address
+          maxLength: 100
+        DS_ADDR:
+          type: string
+          description: Destination Addres
+          maxLength: 100
+        C_ID:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - C_ID
+      - DS_ADDR
+      - SER_TYPE
+      - SH_CHARGES
+      - SH_CONTENT
+      - SH_DOMAIN
+      - SH_ID
+      - SH_WEIGHT
+      - SR_ADDR
+      - rec_id
+    Status:
+      type: object
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        SH_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Shipmet Id
+        Current_Status:
+          type: string
+          description: Current Status of Shipment
+          maxLength: 15
+        Sent_date:
+          type: string
+          format: date
+          nullable: true
+          description: Sent Date
+        Delivery_date:
+          type: string
+          format: date
+          nullable: true
+          description: Delivery Date
+      required:
+      - Current_Status
+      - SH_ID
+      - rec_id
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows: {}

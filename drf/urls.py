@@ -38,9 +38,14 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
+    # path(
+    #     "",  # home
+    #     SpectacularRedocView.as_view(url_name="schema"),
+    #     name="redoc",
+    # ),
     path(
         "",  # home
-        SpectacularRedocView.as_view(url_name="schema"),
-        name="redoc",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
     ),
 ]
