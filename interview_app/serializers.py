@@ -80,7 +80,7 @@ class CustomerShipmentSerializer(serializers.ModelSerializer):
         fields = ["C_ID", "C_NAME", "shipments"]
 
 
-# status>shipment
+# status > ems
 class EMSStatusSerializer(serializers.ModelSerializer):
     # status = StatusSerializer(many=True, read_only=True, source="status_set")
     Status_Sh_ID = StatusSerializer(read_only=True)
@@ -93,7 +93,7 @@ class EMSStatusSerializer(serializers.ModelSerializer):
 # status > shipment
 class DeliveredShipmentSerializer(serializers.ModelSerializer):
     # Include the Status information
-    status = serializers.SerializerMethodField()
+    status = serializers.SerializerMethodField(read_only=True)
     # Status_Sh_ID = StatusSerializer(read_only=True, source="status_set", many=True)
 
     class Meta:
@@ -107,6 +107,15 @@ class DeliveredShipmentSerializer(serializers.ModelSerializer):
         if ems and ems.Status_Sh_ID:
             return StatusSerializer(ems.Status_Sh_ID).data
         return None
+
+
+# shipment{rec_id} > customer
+class ShipmentCustomerSerializer(serializers.ModelSerializer):
+    Customer = CustomerSerializer(source="C_ID", read_only=True)  # many = True
+
+    class Meta:
+        model = Shipment
+        fields = "__all__"  # ["SR_ADDR", "DS_ADDR", "Customer"]
 
 
 # endregion

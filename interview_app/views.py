@@ -169,4 +169,17 @@ class DeliveredShipmentListView(generics.ListAPIView):
         return super().dispatch(*args, **kwargs)
 
 
+class ShipmentCustomerDetailView(generics.RetrieveAPIView):
+    serializer_class = ShipmentCustomerSerializer
+
+    def get_object(self):
+        rec_id = self.kwargs.get("rec_id")
+        return get_object_or_404(Shipment, rec_id=rec_id)
+
+    # To make the cache middleware catch dispatch methods instead of get methods, we are ading method_decorator here.
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
 # endregion

@@ -64,4 +64,9 @@ urlpatterns = [
         DeliveredShipmentListView.as_view(),
         name="delivered-shipment-list",
     ),
+    path(
+        "shipments/<int:rec_id>/customer/",
+        ShipmentCustomerDetailView.as_view(),
+        name="shipments-customer-detail",
+    ),
 ]

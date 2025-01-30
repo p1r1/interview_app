@@ -1,0 +1,13 @@
+### Get Oauth Token -> "Resource owner password" based
+# @name loginrequest
+POST {{BASE_URL}}/o/token/
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&username={{YOUR_USER_NAME}}&password={{YOUR_USER_PASS}}&client_id={{YOUR_CLIENT_ID}}&client_secret={{YOUR_CLIENT_SECRET}}
+
+### Token variable 
+@auth_token= {{loginrequest.response.body.$.access_token}}
+
+### Get shipments 3 customer
+GET {{BASE_URL}}/api/shipments/3/customer/
+Authorization: Bearer {{auth_token}}

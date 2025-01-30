@@ -1,14 +1,8 @@
-import secrets
-import base64
-import hashlib
+print("hello world")
 
-# Generate a random code verifier
-code_verifier = secrets.token_urlsafe(32)
+csv_folder_path = "./docs/other_files/csv/"
 
-# Generate the code challenge
-code_challenge = base64.urlsafe_b64encode(
-    hashlib.sha256(code_verifier.encode()).digest()
-).rstrip(b'=').decode()
+import os
 
-print("Code Verifier:", code_verifier)
-print("Code Challenge:", code_challenge)
+if os.path.exists(os.path.join(csv_folder_path, "Employee_Details.csv")):
+    print("yow")
