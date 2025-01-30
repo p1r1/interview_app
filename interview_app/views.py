@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import generics, filters
 from .models import *
 from .serializers import *
@@ -124,3 +125,48 @@ class EmployeeManagesShipmentRetrieveUpdateDestroyView(
 ):
     queryset = EmployeeManagesShipment.objects.all()
     serializer_class = EmployeeManagesShipmentSerializer
+
+
+# region CUSTOM END POINTS
+# customer>shipment
+class CustomerShipmentDetailsView(generics.RetrieveAPIView):
+    serializer_class = CustomerShipmentSerializer
+
+    def get_object(self):
+        rec_id = self.kwargs.get("rec_id")
+        return get_object_or_404(Customer, rec_id=rec_id)
+
+    # To make the cache middleware catch dispatch methods instead of get methods, we are ading method_decorator here.
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
+class EMSStatusDeailView(generics.RetrieveAPIView):
+    serializer_class = EMSStatusSerializer
+
+    def get_object(self):
+        rec_id = self.kwargs.get("rec_id")
+        return get_object_or_404(EmployeeManagesShipment, rec_id=rec_id)
+
+    # To make the cache middleware catch dispatch methods instead of get methods, we are ading method_decorator here.
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
+class DeliveredShipmentListView(generics.ListAPIView):
+    serializer_class = DeliveredShipmentSerializer
+
+    def get_queryset(self):
+        return Shipment.objects.filter(
+            employeemanagesshipment__Status_Sh_ID__Current_Status="DELIVERED"
+        ).prefetch_related("employeemanagesshipment_set__Status_Sh_ID")
+
+    # To make the cache middleware catch dispatch methods instead of get methods, we are ading method_decorator here.
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
+# endregion

@@ -21,7 +21,6 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -42,11 +41,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "interview_app",
-    "rest_framework",
-    "oauth2_provider",
-    "django_redis",
-    "drf_spectacular",
+    "interview_app",  # my app name
+    "rest_framework",  # drf
+    "oauth2_provider",  # authorization
+    "django_redis",  # cahce
+    "drf_spectacular",  # docs
 ]
 
 MIDDLEWARE = [
@@ -57,6 +56,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Other middleware
+    "oauth2_provider.middleware.OAuth2TokenMiddleware",
 ]
 
 ROOT_URLCONF = "drf.urls"
@@ -79,26 +80,24 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "drf.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # Parse the database URL
-url = urlparse(os.getenv("DATABASE_URL"))
+DATABASE_URL = urlparse(os.getenv("DATABASE_URL"))
+# TODO: check if this empty raise error
 
-print(url)
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         # "URL": os.getenv("DATABASE_URL"),
-        "NAME": url.path[1:],  # Extract database name from path
-        "USER": url.username,
-        "PASSWORD": url.password,
-        "HOST": url.hostname,
-        "PORT": url.port,
+        "NAME": DATABASE_URL.path[1:],  # Extract database name from path
+        "USER": DATABASE_URL.username,
+        "PASSWORD": DATABASE_URL.password,
+        "HOST": DATABASE_URL.hostname,
+        "PORT": DATABASE_URL.port,
     }
 }
-
 
 # Cahce
 REDIS_URL = os.getenv("REDIS_URL")
@@ -111,14 +110,21 @@ CACHES = {
 }
 
 CACHE_TTL_SECONDS = int(os.getenv("CACHE_TTL_SECONDS", 60))
+PAGINATION_PAGE_SIZE = int(os.getenv("PAGINATION_PAGE_SIZE", 10))
 
-# rest
+# rest, oauth2
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
+        # TODO: for swagger authorize button, not good for security!
+        # "rest_framework.authentication.SessionAuthentication",
     ),
+    # default auth, all endpoints needs to be oauth
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    # pagination
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 10,
+    "PAGE_SIZE": PAGINATION_PAGE_SIZE,
+    # schema
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -126,12 +132,28 @@ REST_FRAMEWORK = {
 SPECTACULAR_SETTINGS = {
     "TITLE": "Logistics API",
     "VERSION": "1.0.0",
+    "REDOC_SETTINGS": {
+        "SORT_PROPERTIES_ALPHABETICALLY": True,
+    },
+    "SWAGGER_UI_SETTINGS": {
+        "apisSorter": "alpha",
+        "operationsSorter": "alpha",
+    },
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-OAUTH2_PROVIDER = {"ACCESS_TOKEN_EXPIRE_SECONDS": 36000, "PKCE_REQUIRED": True}
+ACCESS_TOKEN_EXPIRE_SECONDS = int(os.getenv("ACCESS_TOKEN_EXPIRE_SECONDS", 36000))
+OAUTH2_PROVIDER = {
+    "ACCESS_TOKEN_EXPIRE_SECONDS": ACCESS_TOKEN_EXPIRE_SECONDS,
+    "PKCE_REQUIRED": True,
+    "SCOPES": {
+        "read": "Read scope",
+        "write": "Write scope",
+    },
+}
+LOGIN_URL = "/admin/login/"
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -154,7 +176,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Istanbul"  # UTC
 
 USE_I18N = True
 

@@ -1,0 +1,12 @@
+{
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "YOUR_USER_NAME": "your_api_user_name",
+            "YOUR_USER_PASS": "your_api_user_password",
+            "YOUR_CLIENT_ID": "your_api_user_client_id",
+            "YOUR_CLIENT_SECRET": "your_api_user_client_secret",
+            "YOUR_REDIRECT_URI": "http://localhost:8000/",
+            "BASE_URL": "http://localhost:8000/"
+        }
+    }
+}

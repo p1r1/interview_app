@@ -95,6 +95,7 @@ class Status(models.Model):
     rec_id = models.BigAutoField(
         primary_key=True, editable=False, help_text="Record Id"
     )
+    # foreign key?
     SH_ID = models.BigIntegerField(unique=True, help_text="Shipmet Id")
     Current_Status = models.CharField(
         max_length=15, help_text="Current Status of Shipment"
