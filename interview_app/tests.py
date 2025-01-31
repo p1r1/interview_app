@@ -1,8 +1,4 @@
-import os
 from django.test import TestCase
-
-# Create your tests here.
-
 from django.test import TestCase
 from django.urls import reverse
 from rest_framework.test import APITestCase, APIClient
@@ -12,6 +8,10 @@ from oauth2_provider.models import Application
 from datetime import date
 from .models import *
 from interview_app.serializers import *
+from django.core.cache import cache
+from unittest.mock import patch
+
+# Create your tests here.
 
 
 # region model test
@@ -251,6 +251,47 @@ class APITests(APITestCase):
         }
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_employee_list_cache(self):
+        # Clear cache
+        cache.clear()
+
+        # Get token and set authorization
+        token = self.get_token()
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}")
+        url = reverse("employee-list")
+
+        # First request should hit the DB
+        with self.assertNumQueries(3):
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Second request should hit cache
+        with self.assertNumQueries(0):
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_employee_list_no_cache(self):
+        # Clear cache
+        cache.clear()
+
+        # Get token and set authorization
+        token = self.get_token()
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}")
+        url = reverse("employee-list")
+
+        # First request should hit the DB
+        with self.assertNumQueries(3):
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # Clear cache
+        cache.clear()
+
+        # Second request should hit database because cache is clear
+        with self.assertNumQueries(3):
+            response = self.client.get(url)
+            self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class CustomEndpointTests(APITestCase):

@@ -61,6 +61,11 @@ class EmployeeRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    @handle_exceptions
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
     @handle_exceptions
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
@@ -93,6 +98,11 @@ class MembershipListCreateView(generics.ListCreateAPIView):
 class MembershipRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Membership.objects.all()
     serializer_class = MembershipSerializer
+
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    @handle_exceptions
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
     @handle_exceptions
     def retrieve(self, request, *args, **kwargs):
@@ -129,6 +139,11 @@ class CustomerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
 
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    @handle_exceptions
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
     @handle_exceptions
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
@@ -147,7 +162,7 @@ class ShipmentListCreateView(generics.ListCreateAPIView):
     queryset = Shipment.objects.all()
     serializer_class = ShipmentSerializer
     filter_backends = [filters.OrderingFilter]
-    ordering_fields = ["SD_CHARGES"]
+    ordering_fields = ["SH_CHARGES"]
 
     # To make the cache middleware catch dispatch methods instead of get methods, we are ading method_decorator here.
     @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
@@ -163,6 +178,11 @@ class ShipmentListCreateView(generics.ListCreateAPIView):
 class ShipmentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Shipment.objects.all()
     serializer_class = ShipmentSerializer
+
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    @handle_exceptions
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
     @handle_exceptions
     def retrieve(self, request, *args, **kwargs):
@@ -197,6 +217,11 @@ class PaymentRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Payment.objects.all()
     serializer_class = PaymentSerializer
 
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    @handle_exceptions
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
     @handle_exceptions
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
@@ -229,6 +254,11 @@ class StatusListCreateView(generics.ListCreateAPIView):
 class StatusRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Status.objects.all()
     serializer_class = StatusSerializer
+
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    @handle_exceptions
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
     @handle_exceptions
     def retrieve(self, request, *args, **kwargs):
@@ -264,6 +294,11 @@ class EmployeeManagesShipmentRetrieveUpdateDestroyView(
 ):
     queryset = EmployeeManagesShipment.objects.all()
     serializer_class = EmployeeManagesShipmentSerializer
+
+    @method_decorator(cache_page(settings.CACHE_TTL_SECONDS))
+    @handle_exceptions
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
 
     @handle_exceptions
     def retrieve(self, request, *args, **kwargs):
