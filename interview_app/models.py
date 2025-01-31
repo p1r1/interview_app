@@ -5,6 +5,10 @@ from django.db import models
 
 # we can not trust E_ID to be a primarykey!
 class Employee(models.Model):
+    """
+    Represents an employee in the system.
+    """
+
     rec_id = models.BigAutoField(
         primary_key=True, editable=False, help_text="Record Id"
     )
@@ -16,10 +20,15 @@ class Employee(models.Model):
     E_CONT_NO = models.BigIntegerField(help_text="Employee Phone")
 
     def __str__(self):
+        """Returns a string representation."""
         return f"{self.E_NAME} ({self.E_DESIGNATION})"
 
 
 class Membership(models.Model):
+    """
+    Represents a membership plan.
+    """
+
     rec_id = models.BigAutoField(
         primary_key=True, editable=False, help_text="Record Id"
     )
@@ -34,6 +43,10 @@ class Membership(models.Model):
 
 
 class Customer(models.Model):
+    """
+    Represents a customer in the system.
+    """
+
     rec_id = models.BigAutoField(
         primary_key=True, editable=False, help_text="Record Id"
     )
@@ -52,6 +65,10 @@ class Customer(models.Model):
 
 
 class Shipment(models.Model):
+    """
+    Represents a shipment in the system.
+    """
+
     rec_id = models.BigAutoField(
         primary_key=True, editable=False, help_text="Record Id"
     )
@@ -72,6 +89,10 @@ class Shipment(models.Model):
 
 
 class Payment(models.Model):
+    """
+    Represents a payment made by a customer for a shipment.
+    """
+
     rec_id = models.BigAutoField(
         primary_key=True, editable=False, help_text="Record Id"
     )
@@ -92,6 +113,10 @@ class Payment(models.Model):
 
 
 class Status(models.Model):
+    """
+    Represents the status of a shipment.
+    """
+
     rec_id = models.BigAutoField(
         primary_key=True, editable=False, help_text="Record Id"
     )
@@ -108,6 +133,10 @@ class Status(models.Model):
 
 
 class EmployeeManagesShipment(models.Model):
+    """
+    Represents the relationship between an employee and a shipment they manage.
+    """
+
     rec_id = models.BigAutoField(
         primary_key=True, unique=True, editable=False, help_text="Record Id"
     )
