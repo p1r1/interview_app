@@ -160,6 +160,7 @@ CACHES = {
 
 CACHE_TTL_SECONDS = int(os.getenv("CACHE_TTL_SECONDS", 60))
 PAGINATION_PAGE_SIZE = int(os.getenv("PAGINATION_PAGE_SIZE", 10))
+REQUEST_PER_MIN = os.getenv("REQUEST_PER_MIN", "30")
 
 # rest, oauth2
 REST_FRAMEWORK = {
@@ -181,9 +182,9 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.AnonRateThrottle",
     ],
     "DEFAULT_THROTTLE_RATES": {
-        # All users: 10 requests per minute
-        "anon": "10/minute",
-        "user": "10/minute",
+        # All users: requests per minute
+        "anon": f"{REQUEST_PER_MIN}/minute",
+        "user": f"{REQUEST_PER_MIN}/minute",
     },
     "DEFAULT_THROTTLE_CACHE": "default",  # Uses Redis as the backend
 }

@@ -88,8 +88,15 @@ Vscode rest client eklentisi ile geliştireln bu dosyalar api için örnekler te
 - Daha sonra diğer "Send Request" link yada linklerine tıklayarak api örnek kullanımı görebilirsiniz.
 
 ### 3. Testler
+- #### Unit, API testleri 
 ```bash
 python manage.py test
 ```
+- #### Performans (Load) Testi
+```bash
+locust -f locust.py --host=http://127.0.0.1:8000
+```
+http://127.0.0.1:8000 -> API base url
+http://localhost:8089 -> start test in here 
 ## Kaynaklar
 https://www.kaggle.com/datasets/aashokaacharya/logistics-company-dataset-for-sql
