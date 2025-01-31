@@ -9,7 +9,7 @@ Bu proje, lojistik verilerini analiz etmek, yönetmek ve operasyonel verimliliğ
 **Sanal Ortam Oluşturma:**
 Ana dizine bir sanal ortam (.venv) oluşturun.
 ```bash
-python -m venv /path/to/new/virtual/environment
+python -m venv .venv
 ```
 Sonra gerekli kütüphaneleri yükleyin.
 ```bash
@@ -43,6 +43,12 @@ Windows işletim sisteminde docker içinde redis kullanmak için docker yükleyi
 docker run --name django-redis -d -p 6379:6379 --rm redis
 ```
 Burada iç port ve dış port numarası önemli (6379:6379). Yine redis bağlantısını ".env" dosyanıza eklemeyi unutmayın.
+
+```bash
+docker exec -it b5d214f1c.. redis-cli
+```
+b5d214f1c.. (redis container id)
+Bu komut ile redis-cli arayüzüne ulaşabilirsiniz.
 
 **Swagger UI Schema:**
 Swagger UI schema.yaml oluşturmak için :

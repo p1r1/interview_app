@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "oauth2_provider",  # authorization
     "django_redis",  # cahce
     "drf_spectacular",  # docs
+    "django_ratelimit",
 ]
 
 MIDDLEWARE = [
@@ -98,6 +99,26 @@ DATABASES = {
         "PORT": DATABASE_URL.port,
     }
 }
+# log
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+    "loggers": {
+        "rest_framework.throttling": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+        },
+    },
+}
 
 # Cahce
 REDIS_URL = os.getenv("REDIS_URL")
@@ -126,6 +147,17 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": PAGINATION_PAGE_SIZE,
     # schema
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    # default rate limit
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.UserRateThrottle",
+        "rest_framework.throttling.AnonRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        # All users: 10 requests per minute
+        "anon": "10/minute",
+        "user": "10/minute",
+    },
+    "DEFAULT_THROTTLE_CACHE": "default",  # Uses Redis as the backend
 }
 
 # docs
