@@ -96,7 +96,7 @@ python manage.py test
 ```bash
 locust -f locust.py --host=http://127.0.0.1:8000
 ```
-http://127.0.0.1:8000 -> API base url
-http://localhost:8089 -> start test in here 
+- http://127.0.0.1:8000 -> API base url
+- http://localhost:8089 -> Locust performans testini bu urlden yapabilirsiniz. 
 ## Kaynaklar
 https://www.kaggle.com/datasets/aashokaacharya/logistics-company-dataset-for-sql
