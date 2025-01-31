@@ -107,15 +107,43 @@ LOGGING = {
         "console": {
             "class": "logging.StreamHandler",
         },
+        "file": {
+            "level": "ERROR",
+            "class": "logging.FileHandler",
+            "filename": "error.log",
+            "formatter": "verbose",
+        },
+        "request": {
+            "level": "INFO",
+            "class": "logging.FileHandler",
+            "filename": "request.log",
+            "formatter": "request",
+        },
+    },
+    "formatters": {
+        "verbose": {
+            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "request": {
+            "format": "{asctime} {levelname} {request} {message}",
+            "style": "{",
+        },
     },
     "root": {
-        "handlers": ["console"],
+        "handlers": ["console", "file"],
         "level": "INFO",
     },
     "loggers": {
         "rest_framework.throttling": {
-            "handlers": ["console"],
+            "handlers": ["console", "file"],
             "level": "DEBUG",
+            "propagate": False,
+        },
+        "request": {
+            "handlers": ["request"],
+            "level": "INFO",
+            "propagate": False,
         },
     },
 }
@@ -171,12 +199,25 @@ SPECTACULAR_SETTINGS = {
         "apisSorter": "alpha",
         "operationsSorter": "alpha",
     },
+    "COMPONENTS": {
+        "securitySchemes": {
+            "oauth2": {
+                "type": "oauth2",
+                "flow": "password",
+                "tokenUrl": "/o/token/",
+                "scopes": {
+                    "read": "Grants read access",
+                    "write": "Grants write access",
+                },
+            }
+        }
+    },
 }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-ACCESS_TOKEN_EXPIRE_SECONDS = int(os.getenv("ACCESS_TOKEN_EXPIRE_SECONDS", 36000))
+ACCESS_TOKEN_EXPIRE_SECONDS = int(os.getenv("ACCESS_TOKEN_EXPIRE_SECONDS", 3600))
 OAUTH2_PROVIDER = {
     "ACCESS_TOKEN_EXPIRE_SECONDS": ACCESS_TOKEN_EXPIRE_SECONDS,
     "PKCE_REQUIRED": True,

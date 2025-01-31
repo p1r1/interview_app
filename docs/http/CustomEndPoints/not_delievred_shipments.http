@@ -8,6 +8,6 @@ grant_type=password&username={{YOUR_USER_NAME}}&password={{YOUR_USER_PASS}}&clie
 ### Token variable 
 @auth_token= {{loginrequest.response.body.$.access_token}}
 
-### Get shipment 3 status
-GET {{BASE_URL}}/api/employeemanagesshipments/3/status/
+### Get delivered shipments
+GET {{BASE_URL}}/api/shipments/notdelivered/
 Authorization: Bearer {{auth_token}}
