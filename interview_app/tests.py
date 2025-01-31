@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.test import TestCase
 from django.test import TestCase
 from django.urls import reverse
@@ -392,6 +393,69 @@ class CustomEndpointTests(APITestCase):
         }
         response = self.client.post(token_url, data)
         return response.json()["access_token"]
+
+    def test_customer_search(self):
+        # Get token and set authorization
+        token = self.get_token()
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}")
+
+        # Create a second customer for search test
+        Customer.objects.create(
+            C_ID=2,
+            C_NAME="Another Customer",
+            C_EMAIL_ID="another@example.com",
+            C_CONT_NO=9876543211,
+            C_ADDR="100 other Street",
+            C_TYPE="Regular",
+            M_ID=self.membership,
+        )
+
+        # Test search request
+        url = reverse("customer-list") + "?search=Another"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()["results"]), 1)
+        self.assertEqual(response.json()["results"][0]["C_NAME"], "Another Customer")
+
+        # Test search with no results
+        url = reverse("customer-list") + "?search=NonExistent"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()["results"]), 0)
+
+    def test_shipment_ordering(self):
+        # Get token and set authorization
+        token = self.get_token()
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {token}")
+
+        # Create a second shipment for ordering test
+        Shipment.objects.create(
+            SH_ID=2,
+            C_ID=self.customer,
+            SH_CONTENT="Test Content",
+            SH_DOMAIN="International",
+            SER_TYPE="Express",
+            SH_WEIGHT="10kg",
+            SH_CHARGES=200,
+            SR_ADDR="Source Address",
+            DS_ADDR="Destination Address",
+        )
+
+        # Test ordering by SH_CHARGES ascending
+        url = reverse("shipment-list") + "?ordering=SH_CHARGES"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()["results"]), 2)
+        self.assertEqual(response.json()["results"][0]["SH_ID"], 1)
+        self.assertEqual(response.json()["results"][1]["SH_ID"], 2)
+
+        # Test ordering by SH_CHARGES descending
+        url = reverse("shipment-list") + "?ordering=-SH_CHARGES"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(len(response.json()["results"]), 2)
+        self.assertEqual(response.json()["results"][0]["SH_ID"], 2)
+        self.assertEqual(response.json()["results"][1]["SH_ID"], 1)
 
 
 class ShipmentViewTests(APITestCase):
