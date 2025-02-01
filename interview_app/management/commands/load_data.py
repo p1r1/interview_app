@@ -23,21 +23,29 @@ class Command(BaseCommand):
 
     def load_employees(self):
         self.stdout.write("Loading employees...")
-        with open(os.path.join(self.CSV_FOLDER_PATH, "Employee_Details.csv"), "r", encoding="utf-8") as file:
+        with open(
+            os.path.join(self.CSV_FOLDER_PATH, "Employee_Details.csv"),
+            "r",
+            encoding="utf-8",
+        ) as file:
             reader = csv.DictReader(file)
             for row in reader:
                 Employee.objects.create(**row)
 
     def load_memberships(self):
         self.stdout.write("Loading memberships...")
-        with open(os.path.join(self.CSV_FOLDER_PATH, "Membership.csv"), "r", encoding="utf-8") as file:
+        with open(
+            os.path.join(self.CSV_FOLDER_PATH, "Membership.csv"), "r", encoding="utf-8"
+        ) as file:
             reader = csv.DictReader(file)
             for row in reader:
                 Membership.objects.create(**row)
 
     def load_customers(self):
         self.stdout.write("Loading customers...")
-        with open(os.path.join(self.CSV_FOLDER_PATH, "Customer.csv"), "r", encoding="utf-8") as file:
+        with open(
+            os.path.join(self.CSV_FOLDER_PATH, "Customer.csv"), "r", encoding="utf-8"
+        ) as file:
             reader = csv.DictReader(file)
             for row in reader:
                 membership_id = row.pop("M_ID")
@@ -46,7 +54,11 @@ class Command(BaseCommand):
 
     def load_shipments(self):
         self.stdout.write("Loading shipments...")
-        with open(os.path.join(self.CSV_FOLDER_PATH, "Shipment_Details.csv"), "r", encoding="utf-8") as file:
+        with open(
+            os.path.join(self.CSV_FOLDER_PATH, "Shipment_Details.csv"),
+            "r",
+            encoding="utf-8",
+        ) as file:
             reader = csv.DictReader(file)
             for row in reader:
                 customer_id = row.pop("C_ID")
@@ -55,7 +67,11 @@ class Command(BaseCommand):
 
     def load_payments(self):
         self.stdout.write("Loading payments...")
-        with open(os.path.join(self.CSV_FOLDER_PATH, "Payment_Details.csv"), "r", encoding="utf-8") as file:
+        with open(
+            os.path.join(self.CSV_FOLDER_PATH, "Payment_Details.csv"),
+            "r",
+            encoding="utf-8",
+        ) as file:
             reader = csv.DictReader(file)
             for row in reader:
                 shipment_id = row.pop("SH_ID")
@@ -80,7 +96,9 @@ class Command(BaseCommand):
 
     def load_statuses(self):
         self.stdout.write("Loading statuses...")
-        with open(os.path.join(self.CSV_FOLDER_PATH, "Status.csv"), "r", encoding="utf-8") as file:
+        with open(
+            os.path.join(self.CSV_FOLDER_PATH, "Status.csv"), "r", encoding="utf-8"
+        ) as file:
             reader = csv.DictReader(file)
             for row in reader:
                 sent_date = row.pop("Sent_date")
@@ -110,7 +128,11 @@ class Command(BaseCommand):
 
     def load_employee_manages_shipments(self):
         self.stdout.write("Loading employee manages shipments...")
-        with open(os.path.join(self.CSV_FOLDER_PATH, "employee_manages_shipment.csv")", "r", encoding="utf-8") as file:
+        with open(
+            os.path.join(self.CSV_FOLDER_PATH, "employee_manages_shipment.csv"),
+            "r",
+            encoding="utf-8",
+        ) as file:
             reader = csv.DictReader(file)
             for row in reader:
                 employee_id = row.pop("Employee_E_ID")

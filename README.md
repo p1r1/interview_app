@@ -11,6 +11,10 @@ Bu proje, lojistik verilerini analiz etmek, yönetmek ve operasyonel verimliliğ
 ```bash
 python -m venv .venv
 ```
+- Sanal ortamı etkinleştirin.
+```bash
+
+```
 - Sonra gerekli kütüphaneleri yükleyin.
 ```bash
 pip install -r requirements.txt
@@ -39,7 +43,7 @@ pg_restore -U postgre -d interview_app -v interview_app.dump
 "postgre" kullanıcı adı.
 
 ### 3. Redis
-Windows işletim sisteminde resmi olarak bir redis dağıtımı olmadığı için docker kullanacağız. Docker yükleyin ve aşağıdaki komutu çalıştırın.
+Windows işletim sisteminde resmi olarak bir redis dağıtımı olmadığı için docker kullanacağız. Docker yükleyin, çalıştırın ve aşağıdaki komutu çalıştırın.
 ``` bash
 docker run --name django-redis -d -p 6379:6379 --rm redis
 ```
