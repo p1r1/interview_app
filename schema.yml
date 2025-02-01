@@ -6,6 +6,7 @@ paths:
   /api/customers/:
     get:
       operationId: api_customers_list
+      description: View for listing and creating Customer objects.
       parameters:
       - name: page
         required: false
@@ -21,8 +22,6 @@ paths:
           type: string
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -32,6 +31,7 @@ paths:
           description: ''
     post:
       operationId: api_customers_create
+      description: View for listing and creating Customer objects.
       tags:
       - api
       requestBody:
@@ -46,8 +46,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Customer'
         required: true
-      security:
-      - {}
       responses:
         '201':
           content:
@@ -58,6 +56,7 @@ paths:
   /api/customers/{rec_id}/:
     get:
       operationId: api_customers_retrieve
+      description: Wrapper function for try except block.
       parameters:
       - in: path
         name: rec_id
@@ -67,8 +66,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -78,6 +75,7 @@ paths:
           description: ''
     put:
       operationId: api_customers_update
+      description: View for retrieving, updating, and deleting a single Customer object.
       parameters:
       - in: path
         name: rec_id
@@ -99,8 +97,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Customer'
         required: true
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -110,6 +106,7 @@ paths:
           description: ''
     patch:
       operationId: api_customers_partial_update
+      description: View for retrieving, updating, and deleting a single Customer object.
       parameters:
       - in: path
         name: rec_id
@@ -130,8 +127,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedCustomer'
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -141,6 +136,7 @@ paths:
           description: ''
     delete:
       operationId: api_customers_destroy
+      description: View for retrieving, updating, and deleting a single Customer object.
       parameters:
       - in: path
         name: rec_id
@@ -150,14 +146,33 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '204':
           description: No response body
+  /api/customers/{rec_id}/shipments/:
+    get:
+      operationId: api_customers_shipments_retrieve
+      description: View for retrieving customer details along with their associated
+        shipments.
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerShipment'
+          description: ''
   /api/employeemanagesshipments/:
     get:
       operationId: api_employeemanagesshipments_list
+      description: View for listing and creating EmployeeManagesShipment objects.
       parameters:
       - name: page
         required: false
@@ -167,8 +182,6 @@ paths:
           type: integer
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -178,6 +191,7 @@ paths:
           description: ''
     post:
       operationId: api_employeemanagesshipments_create
+      description: View for listing and creating EmployeeManagesShipment objects.
       tags:
       - api
       requestBody:
@@ -191,8 +205,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/EmployeeManagesShipment'
-      security:
-      - {}
       responses:
         '201':
           content:
@@ -203,6 +215,7 @@ paths:
   /api/employeemanagesshipments/{rec_id}/:
     get:
       operationId: api_employeemanagesshipments_retrieve
+      description: Wrapper function for try except block.
       parameters:
       - in: path
         name: rec_id
@@ -212,8 +225,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -223,6 +234,8 @@ paths:
           description: ''
     put:
       operationId: api_employeemanagesshipments_update
+      description: View for retrieving, updating, and deleting a single EmployeeManagesShipment
+        object.
       parameters:
       - in: path
         name: rec_id
@@ -243,8 +256,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/EmployeeManagesShipment'
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -254,6 +265,8 @@ paths:
           description: ''
     patch:
       operationId: api_employeemanagesshipments_partial_update
+      description: View for retrieving, updating, and deleting a single EmployeeManagesShipment
+        object.
       parameters:
       - in: path
         name: rec_id
@@ -274,8 +287,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedEmployeeManagesShipment'
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -285,6 +296,8 @@ paths:
           description: ''
     delete:
       operationId: api_employeemanagesshipments_destroy
+      description: View for retrieving, updating, and deleting a single EmployeeManagesShipment
+        object.
       parameters:
       - in: path
         name: rec_id
@@ -294,14 +307,33 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '204':
           description: No response body
+  /api/employeemanagesshipments/{rec_id}/status/:
+    get:
+      operationId: api_employeemanagesshipments_status_retrieve
+      description: View for retrieving EmployeeManagesShipment details with Status
+        details.
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EMSStatus'
+          description: ''
   /api/employees/:
     get:
       operationId: api_employees_list
+      description: View for listing and creating Employee objects.
       parameters:
       - name: page
         required: false
@@ -311,8 +343,6 @@ paths:
           type: integer
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -322,6 +352,7 @@ paths:
           description: ''
     post:
       operationId: api_employees_create
+      description: View for listing and creating Employee objects.
       tags:
       - api
       requestBody:
@@ -336,8 +367,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Employee'
         required: true
-      security:
-      - {}
       responses:
         '201':
           content:
@@ -348,6 +377,7 @@ paths:
   /api/employees/{rec_id}/:
     get:
       operationId: api_employees_retrieve
+      description: Wrapper function for try except block.
       parameters:
       - in: path
         name: rec_id
@@ -357,8 +387,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -368,6 +396,7 @@ paths:
           description: ''
     put:
       operationId: api_employees_update
+      description: View for retrieving, updating, and deleting a single Employee object.
       parameters:
       - in: path
         name: rec_id
@@ -389,8 +418,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Employee'
         required: true
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -400,6 +427,7 @@ paths:
           description: ''
     patch:
       operationId: api_employees_partial_update
+      description: View for retrieving, updating, and deleting a single Employee object.
       parameters:
       - in: path
         name: rec_id
@@ -420,8 +448,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedEmployee'
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -431,6 +457,7 @@ paths:
           description: ''
     delete:
       operationId: api_employees_destroy
+      description: View for retrieving, updating, and deleting a single Employee object.
       parameters:
       - in: path
         name: rec_id
@@ -440,14 +467,13 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '204':
           description: No response body
   /api/memberships/:
     get:
       operationId: api_memberships_list
+      description: View for listing and creating Membership objects.
       parameters:
       - name: page
         required: false
@@ -457,8 +483,6 @@ paths:
           type: integer
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -468,6 +492,7 @@ paths:
           description: ''
     post:
       operationId: api_memberships_create
+      description: View for listing and creating Membership objects.
       tags:
       - api
       requestBody:
@@ -482,8 +507,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Membership'
         required: true
-      security:
-      - {}
       responses:
         '201':
           content:
@@ -494,6 +517,7 @@ paths:
   /api/memberships/{rec_id}/:
     get:
       operationId: api_memberships_retrieve
+      description: Wrapper function for try except block.
       parameters:
       - in: path
         name: rec_id
@@ -503,8 +527,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -514,6 +536,8 @@ paths:
           description: ''
     put:
       operationId: api_memberships_update
+      description: View for retrieving, updating, and deleting a single Membership
+        object.
       parameters:
       - in: path
         name: rec_id
@@ -535,8 +559,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Membership'
         required: true
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -546,6 +568,8 @@ paths:
           description: ''
     patch:
       operationId: api_memberships_partial_update
+      description: View for retrieving, updating, and deleting a single Membership
+        object.
       parameters:
       - in: path
         name: rec_id
@@ -566,8 +590,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedMembership'
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -577,6 +599,8 @@ paths:
           description: ''
     delete:
       operationId: api_memberships_destroy
+      description: View for retrieving, updating, and deleting a single Membership
+        object.
       parameters:
       - in: path
         name: rec_id
@@ -586,14 +610,13 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '204':
           description: No response body
   /api/payments/:
     get:
       operationId: api_payments_list
+      description: View for listing and creating Payment objects.
       parameters:
       - name: page
         required: false
@@ -603,8 +626,6 @@ paths:
           type: integer
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -614,6 +635,7 @@ paths:
           description: ''
     post:
       operationId: api_payments_create
+      description: View for listing and creating Payment objects.
       tags:
       - api
       requestBody:
@@ -628,8 +650,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Payment'
         required: true
-      security:
-      - {}
       responses:
         '201':
           content:
@@ -640,6 +660,7 @@ paths:
   /api/payments/{rec_id}/:
     get:
       operationId: api_payments_retrieve
+      description: Wrapper function for try except block.
       parameters:
       - in: path
         name: rec_id
@@ -649,8 +670,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -660,6 +679,7 @@ paths:
           description: ''
     put:
       operationId: api_payments_update
+      description: View for retrieving, updating, and deleting a single Payment object.
       parameters:
       - in: path
         name: rec_id
@@ -681,8 +701,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Payment'
         required: true
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -692,6 +710,7 @@ paths:
           description: ''
     patch:
       operationId: api_payments_partial_update
+      description: View for retrieving, updating, and deleting a single Payment object.
       parameters:
       - in: path
         name: rec_id
@@ -712,8 +731,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedPayment'
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -723,6 +740,7 @@ paths:
           description: ''
     delete:
       operationId: api_payments_destroy
+      description: View for retrieving, updating, and deleting a single Payment object.
       parameters:
       - in: path
         name: rec_id
@@ -732,8 +750,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '204':
           description: No response body
@@ -884,6 +900,7 @@ paths:
   /api/shipments/:
     get:
       operationId: api_shipments_list
+      description: View for listing and creating Shipment objects.
       parameters:
       - name: ordering
         required: false
@@ -899,8 +916,6 @@ paths:
           type: integer
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -910,6 +925,7 @@ paths:
           description: ''
     post:
       operationId: api_shipments_create
+      description: View for listing and creating Shipment objects.
       tags:
       - api
       requestBody:
@@ -924,8 +940,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Shipment'
         required: true
-      security:
-      - {}
       responses:
         '201':
           content:
@@ -936,6 +950,7 @@ paths:
   /api/shipments/{rec_id}/:
     get:
       operationId: api_shipments_retrieve
+      description: Wrapper function for try except block.
       parameters:
       - in: path
         name: rec_id
@@ -945,8 +960,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -956,6 +969,7 @@ paths:
           description: ''
     put:
       operationId: api_shipments_update
+      description: View for retrieving, updating, and deleting a single Shipment object.
       parameters:
       - in: path
         name: rec_id
@@ -977,8 +991,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Shipment'
         required: true
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -988,6 +1000,7 @@ paths:
           description: ''
     patch:
       operationId: api_shipments_partial_update
+      description: View for retrieving, updating, and deleting a single Shipment object.
       parameters:
       - in: path
         name: rec_id
@@ -1008,8 +1021,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedShipment'
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -1019,6 +1030,7 @@ paths:
           description: ''
     delete:
       operationId: api_shipments_destroy
+      description: View for retrieving, updating, and deleting a single Shipment object.
       parameters:
       - in: path
         name: rec_id
@@ -1028,14 +1040,33 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '204':
           description: No response body
-  /api/statuses/:
+  /api/shipments/{rec_id}/customer/:
     get:
-      operationId: api_statuses_list
+      operationId: api_shipments_customer_retrieve
+      description: View for retrieving shipment details along with their associated
+        customer.
+      parameters:
+      - in: path
+        name: rec_id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentCustomer'
+          description: ''
+  /api/shipments/delivered/:
+    get:
+      operationId: api_shipments_delivered_list
+      description: View for listing all delivered shipments.
       parameters:
       - name: page
         required: false
@@ -1045,8 +1076,46 @@ paths:
           type: integer
       tags:
       - api
-      security:
-      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDeliveredShipmentList'
+          description: ''
+  /api/shipments/notdelivered/:
+    get:
+      operationId: api_shipments_notdelivered_list
+      description: View for listing all non-delivered shipments.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedDeliveredShipmentList'
+          description: ''
+  /api/statuses/:
+    get:
+      operationId: api_statuses_list
+      description: View for listing and creating Status objects.
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      tags:
+      - api
       responses:
         '200':
           content:
@@ -1056,6 +1125,7 @@ paths:
           description: ''
     post:
       operationId: api_statuses_create
+      description: View for listing and creating Status objects.
       tags:
       - api
       requestBody:
@@ -1070,8 +1140,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Status'
         required: true
-      security:
-      - {}
       responses:
         '201':
           content:
@@ -1082,6 +1150,7 @@ paths:
   /api/statuses/{rec_id}/:
     get:
       operationId: api_statuses_retrieve
+      description: Wrapper function for try except block.
       parameters:
       - in: path
         name: rec_id
@@ -1091,8 +1160,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -1102,6 +1169,7 @@ paths:
           description: ''
     put:
       operationId: api_statuses_update
+      description: View for retrieving, updating, and deleting a single Status object.
       parameters:
       - in: path
         name: rec_id
@@ -1123,8 +1191,6 @@ paths:
             schema:
               $ref: '#/components/schemas/Status'
         required: true
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -1134,6 +1200,7 @@ paths:
           description: ''
     patch:
       operationId: api_statuses_partial_update
+      description: View for retrieving, updating, and deleting a single Status object.
       parameters:
       - in: path
         name: rec_id
@@ -1154,8 +1221,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/PatchedStatus'
-      security:
-      - {}
       responses:
         '200':
           content:
@@ -1165,6 +1230,7 @@ paths:
           description: ''
     delete:
       operationId: api_statuses_destroy
+      description: View for retrieving, updating, and deleting a single Status object.
       parameters:
       - in: path
         name: rec_id
@@ -1174,8 +1240,6 @@ paths:
         required: true
       tags:
       - api
-      security:
-      - {}
       responses:
         '204':
           description: No response body
@@ -1183,6 +1247,7 @@ components:
   schemas:
     Customer:
       type: object
+      description: Serializer for the Customer model.
       properties:
         rec_id:
           type: integer
@@ -1217,9 +1282,8 @@ components:
           description: Customer Type
           maxLength: 30
         M_ID:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
+          type: integer
+          description: Customer Membership Id
       required:
       - C_ADDR
       - C_CONT_NO
@@ -1229,8 +1293,113 @@ components:
       - C_TYPE
       - M_ID
       - rec_id
+    CustomerShipment:
+      type: object
+      description: Serializer for retrieving customer details along with their associated
+        shipments.
+      properties:
+        C_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Customer Id
+        C_NAME:
+          type: string
+          description: Customer Name
+          maxLength: 30
+        shipments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shipment'
+          readOnly: true
+      required:
+      - C_ID
+      - C_NAME
+      - shipments
+    DeliveredShipment:
+      type: object
+      description: Serializer for retrieving shipment details with the status.
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        status:
+          type: string
+          readOnly: true
+        SH_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Shipment Id
+        SH_CONTENT:
+          type: string
+          description: Shipmet Content Type
+          maxLength: 40
+        SH_DOMAIN:
+          type: string
+          description: Shipment Domain
+          maxLength: 15
+        SER_TYPE:
+          type: string
+          description: Shipment Service Type
+          maxLength: 15
+        SH_WEIGHT:
+          type: string
+          description: Shipment Weight
+          maxLength: 10
+        SH_CHARGES:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          description: Shipment Charges
+        SR_ADDR:
+          type: string
+          description: Source Address
+          maxLength: 100
+        DS_ADDR:
+          type: string
+          description: Destination Addres
+          maxLength: 100
+        C_ID:
+          type: integer
+          description: Customer Id
+      required:
+      - C_ID
+      - DS_ADDR
+      - SER_TYPE
+      - SH_CHARGES
+      - SH_CONTENT
+      - SH_DOMAIN
+      - SH_ID
+      - SH_WEIGHT
+      - SR_ADDR
+      - rec_id
+      - status
+    EMSStatus:
+      type: object
+      description: Serializer for retrieving EmployeeManagesShipment details along
+        with its associated Status details.
+      properties:
+        Employee_E_ID:
+          type: integer
+          description: Employee Id
+        Shipment_Sh_ID:
+          type: integer
+          description: Shipment Id
+        Status_Sh_ID:
+          allOf:
+          - $ref: '#/components/schemas/Status'
+          readOnly: true
+      required:
+      - Employee_E_ID
+      - Shipment_Sh_ID
+      - Status_Sh_ID
     Employee:
       type: object
+      description: Serializer for the Employee model.
       properties:
         rec_id:
           type: integer
@@ -1274,6 +1443,9 @@ components:
       - rec_id
     EmployeeManagesShipment:
       type: object
+      description: |-
+        Serializer for the EmployeeManagesShipment model, includes nested serializers
+        for Employee_E_ID, Shipment_Sh_ID, and Status_Sh_ID.
       properties:
         rec_id:
           type: integer
@@ -1281,15 +1453,15 @@ components:
           description: Record Id
         Employee_E_ID:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+          - $ref: '#/components/schemas/Employee'
           readOnly: true
         Shipment_Sh_ID:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+          - $ref: '#/components/schemas/Shipment'
           readOnly: true
         Status_Sh_ID:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+          - $ref: '#/components/schemas/Status'
           readOnly: true
       required:
       - Employee_E_ID
@@ -1298,32 +1470,7 @@ components:
       - rec_id
     Membership:
       type: object
-      properties:
-        rec_id:
-          type: integer
-          readOnly: true
-          description: Record Id
-        M_ID:
-          type: integer
-          maximum: 9223372036854775807
-          minimum: -9223372036854775808
-          format: int64
-          description: Membership Id
-        Start_date:
-          type: string
-          format: date
-          nullable: true
-          description: Membership Start Date
-        End_date:
-          type: string
-          format: date
-          nullable: true
-          description: Membership End Date
-      required:
-      - M_ID
-      - rec_id
-    Nested:
-      type: object
+      description: Serializer for the Membership model.
       properties:
         rec_id:
           type: integer
@@ -1371,6 +1518,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Customer'
+    PaginatedDeliveredShipmentList:
+      type: object
+      required:
+      - count
+      - results
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/DeliveredShipment'
     PaginatedEmployeeList:
       type: object
       required:
@@ -1511,6 +1681,7 @@ components:
             $ref: '#/components/schemas/Status'
     PatchedCustomer:
       type: object
+      description: Serializer for the Customer model.
       properties:
         rec_id:
           type: integer
@@ -1545,11 +1716,11 @@ components:
           description: Customer Type
           maxLength: 30
         M_ID:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
+          type: integer
+          description: Customer Membership Id
     PatchedEmployee:
       type: object
+      description: Serializer for the Employee model.
       properties:
         rec_id:
           type: integer
@@ -1585,6 +1756,9 @@ components:
           description: Employee Phone
     PatchedEmployeeManagesShipment:
       type: object
+      description: |-
+        Serializer for the EmployeeManagesShipment model, includes nested serializers
+        for Employee_E_ID, Shipment_Sh_ID, and Status_Sh_ID.
       properties:
         rec_id:
           type: integer
@@ -1592,18 +1766,19 @@ components:
           description: Record Id
         Employee_E_ID:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+          - $ref: '#/components/schemas/Employee'
           readOnly: true
         Shipment_Sh_ID:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+          - $ref: '#/components/schemas/Shipment'
           readOnly: true
         Status_Sh_ID:
           allOf:
-          - $ref: '#/components/schemas/Nested'
+          - $ref: '#/components/schemas/Status'
           readOnly: true
     PatchedMembership:
       type: object
+      description: Serializer for the Membership model.
       properties:
         rec_id:
           type: integer
@@ -1627,11 +1802,21 @@ components:
           description: Membership End Date
     PatchedPayment:
       type: object
+      description: Serializer for the Payment model, includes nested CustomerSerializer
+        for C_ID and ShipmentSerializer for SH_ID.
       properties:
         rec_id:
           type: integer
           readOnly: true
           description: Record Id
+        C_ID:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          readOnly: true
+        SH_ID:
+          allOf:
+          - $ref: '#/components/schemas/Shipment'
+          readOnly: true
         Payment_ID:
           type: string
           description: Payment Id (UID)
@@ -1654,21 +1839,19 @@ components:
           format: date
           nullable: true
           description: Payment Date
-        C_ID:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
-        SH_ID:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
     PatchedShipment:
       type: object
+      description: Serializer for the Shipment model, includes nested CustomerSerializer
+        for C_ID.
       properties:
         rec_id:
           type: integer
           readOnly: true
           description: Record Id
+        C_ID:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          readOnly: true
         SH_ID:
           type: integer
           maximum: 9223372036854775807
@@ -1704,12 +1887,9 @@ components:
           type: string
           description: Destination Addres
           maxLength: 100
-        C_ID:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
     PatchedStatus:
       type: object
+      description: Serializer for the Status model.
       properties:
         rec_id:
           type: integer
@@ -1737,11 +1917,21 @@ components:
           description: Delivery Date
     Payment:
       type: object
+      description: Serializer for the Payment model, includes nested CustomerSerializer
+        for C_ID and ShipmentSerializer for SH_ID.
       properties:
         rec_id:
           type: integer
           readOnly: true
           description: Record Id
+        C_ID:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          readOnly: true
+        SH_ID:
+          allOf:
+          - $ref: '#/components/schemas/Shipment'
+          readOnly: true
         Payment_ID:
           type: string
           description: Payment Id (UID)
@@ -1764,14 +1954,6 @@ components:
           format: date
           nullable: true
           description: Payment Date
-        C_ID:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
-        SH_ID:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
       required:
       - AMOUNT
       - C_ID
@@ -1782,11 +1964,76 @@ components:
       - rec_id
     Shipment:
       type: object
+      description: Serializer for the Shipment model, includes nested CustomerSerializer
+        for C_ID.
       properties:
         rec_id:
           type: integer
           readOnly: true
           description: Record Id
+        C_ID:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          readOnly: true
+        SH_ID:
+          type: integer
+          maximum: 9223372036854775807
+          minimum: -9223372036854775808
+          format: int64
+          description: Shipment Id
+        SH_CONTENT:
+          type: string
+          description: Shipmet Content Type
+          maxLength: 40
+        SH_DOMAIN:
+          type: string
+          description: Shipment Domain
+          maxLength: 15
+        SER_TYPE:
+          type: string
+          description: Shipment Service Type
+          maxLength: 15
+        SH_WEIGHT:
+          type: string
+          description: Shipment Weight
+          maxLength: 10
+        SH_CHARGES:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          description: Shipment Charges
+        SR_ADDR:
+          type: string
+          description: Source Address
+          maxLength: 100
+        DS_ADDR:
+          type: string
+          description: Destination Addres
+          maxLength: 100
+      required:
+      - C_ID
+      - DS_ADDR
+      - SER_TYPE
+      - SH_CHARGES
+      - SH_CONTENT
+      - SH_DOMAIN
+      - SH_ID
+      - SH_WEIGHT
+      - SR_ADDR
+      - rec_id
+    ShipmentCustomer:
+      type: object
+      description: Serializer for retrieving shipment details along with its associated
+        customer.
+      properties:
+        rec_id:
+          type: integer
+          readOnly: true
+          description: Record Id
+        Customer:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          readOnly: true
         SH_ID:
           type: integer
           maximum: 9223372036854775807
@@ -1823,11 +2070,11 @@ components:
           description: Destination Addres
           maxLength: 100
         C_ID:
-          allOf:
-          - $ref: '#/components/schemas/Nested'
-          readOnly: true
+          type: integer
+          description: Customer Id
       required:
       - C_ID
+      - Customer
       - DS_ADDR
       - SER_TYPE
       - SH_CHARGES
@@ -1839,6 +2086,7 @@ components:
       - rec_id
     Status:
       type: object
+      description: Serializer for the Status model.
       properties:
         rec_id:
           type: integer
