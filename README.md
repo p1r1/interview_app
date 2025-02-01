@@ -12,9 +12,6 @@ Bu proje, lojistik verilerini analiz etmek, yönetmek ve operasyonel verimliliğ
 python -m venv .venv
 ```
 - Sanal ortamı etkinleştirin.
-```bash
-
-```
 - Sonra gerekli kütüphaneleri yükleyin.
 ```bash
 pip install -r requirements.txt
